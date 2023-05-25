@@ -1,9 +1,23 @@
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Autor } from "./pages";
 
+
+
+const routes = createBrowserRouter([
+  {
+    path: "/admin/autor",
+    element: <Autor />,
+  },
+  {
+    path: "*",
+    element: <h3 className="text-xl text-center text-roboto">Not Found</h3>,
+  },
+]);
 
 function App() {
   return (
     <div>
-      <h1 class="text-3xl font-bold underline">Olá mundo!</h1>
+      <RouterProvider router={routes} />
     </div>
   );
 }
