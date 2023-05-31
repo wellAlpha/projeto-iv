@@ -1,5 +1,5 @@
-import Autor from "./Autor/Autor";
+import AutorPage from "./AutorPage";
 
 export {
-    Autor,
+    AutorPage,
 }

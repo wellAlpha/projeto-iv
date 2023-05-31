@@ -1,23 +1,13 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Autor } from "./pages";
-
-
-
-const routes = createBrowserRouter([
-  {
-    path: "/admin/autor",
-    element: <Autor />,
-  },
-  {
-    path: "*",
-    element: <h3 className="text-xl text-center text-roboto">Not Found</h3>,
-  },
-]);
+import { Outlet } from "react-router-dom";
+import { Menu } from "./layout";
 
 function App() {
   return (
-    <div>
-      <RouterProvider router={routes} />
+    <div className="h-screen w-screen flex flex-row">
+      <Menu />
+      <div className="h-screen w-full flex flex-row justify-center items-center">
+        <Outlet />
+      </div>
     </div>
   );
 }
