@@ -1,20 +1,45 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
-import getAllAutor from "../services/autor/getAllAutor";
-import { Box, Button } from "@mui/material";
-import { Add } from '@mui/icons-material';
+import { getAllAutor, saveAutor } from "../services/autorService";
+import { Box, Button, IconButton } from "@mui/material";
+import { Edit, Delete } from '@mui/icons-material'
 import { CreateAutorDialog } from "../components/dialogs";
-const columns = [
-  { field: "id", headerName: "ID", width: 70, sortable: false },
-  { field: "firstName", headerName: "First name", width: 130, sortable: false },
-  { field: "lastName", headerName: "Last name", width: 130, sortable: false },
-];
+import { red } from "@mui/material/colors";
 
 
 function AutorPage() {
+  const columns = [
+    { field: "id", headerName: "Id", width: 70, sortable: false },
+    { field: "nome", headerName: "Nome", width: 200, sortable: false },
+    {
+      field: 'acoes',
+      headerName: 'Ações',
+      width: 120,
+      renderCell: (params) => (
+        <>
+          <IconButton
+            aria-label="Editar"
+            color="primary"
+            onClick={() => handleEdit(params.row.id)}
+          >
+            <Edit />
+          </IconButton>
+          <IconButton
+            aria-label="Excluir"
+            sx={{ color: red[500] }}
+            onClick={() => handleDelete(params.row.id)}
+          >
+            <Delete />
+          </IconButton>
+        </>
+      ),
+    },
+  ];
+  
   const [autores, setAutores] = useState([]);
   const [open, setOpen] = useState(false);
-
+  const [loading, setLoading] = useState(true);
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -29,29 +54,49 @@ function AutorPage() {
 
   const getAutores = async () => {
     try {
+      setLoading(true)
       const response = await getAllAutor();
-      setAutores(response);
-      console.log(autores)
+      setAutores(response.data);
     } catch (error) {
       console.error(error);
+    }finally{
+      setLoading(false)
     }
   };
+
+  const handleSave = async (data) => {
+    await saveAutor(data)
+    handleClose()
+    await getAutores()
+  }
+
+  const handleEdit = async (id) => {
+
+  }
+
+  const handleDelete = async (id) => {
+
+  }
+
   return (
     <div className="w-9/10">
       <Box>
         <Button onClick={handleClickOpen}>Criar</Button>
         <DataGrid
+          loading={loading}
+          sx={{ height: '23rem', overflow: 'unset' }}
           rows={autores}
           columns={columns}
+          rowSelection={false}
           disableColumnMenu={true}
           initialState={{
             pagination: {
-              paginationModel: { page: 0, pageSize: 10 },
+              paginationModel: { page: 0, pageSize: 5 },
             },
           }}
         />
       </Box>
-      <CreateAutorDialog handleClickOpen={handleClickOpen} open={open} handleClose={handleClose} />
+      <CreateAutorDialog handleSave={handleSave} handleClickOpen={handleClickOpen} open={open} handleClose={handleClose} />
     </div>
   );
 }
