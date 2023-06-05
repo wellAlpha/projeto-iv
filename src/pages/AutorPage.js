@@ -1,13 +1,13 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
-import { getAllAutor, saveAutor } from "../services/autorService";
-import { Box, Button, IconButton } from "@mui/material";
+import { getAllAutor, saveAutor, deleteAutor } from "../services/autorService";
+import { Box, IconButton } from "@mui/material";
 import { Edit, Delete } from '@mui/icons-material'
-import { CreateAutorDialog } from "../components/dialogs";
+import { CreateAutorDialog } from "../dialogs";
 import { red } from "@mui/material/colors";
 
 
-function AutorPage() {
+function AutorPage () {
   const columns = [
     { field: "id", headerName: "Id", width: 70, sortable: false },
     { field: "nome", headerName: "Nome", width: 200, sortable: false },
@@ -15,6 +15,7 @@ function AutorPage() {
       field: 'acoes',
       headerName: 'Ações',
       width: 120,
+      sortable: false,
       renderCell: (params) => (
         <>
           <IconButton
@@ -37,16 +38,8 @@ function AutorPage() {
   ];
   
   const [autores, setAutores] = useState([]);
-  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   useEffect(() => {
     getAutores();
@@ -65,9 +58,12 @@ function AutorPage() {
   };
 
   const handleSave = async (data) => {
-    await saveAutor(data)
-    handleClose()
-    await getAutores()
+    try {
+      await saveAutor(data)
+      await getAutores()
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const handleEdit = async (id) => {
@@ -75,16 +71,22 @@ function AutorPage() {
   }
 
   const handleDelete = async (id) => {
-
+    try {
+      await deleteAutor(id)
+      await getAutores()
+    } catch (error) {
+      console.error(error);
+    }
+    
   }
 
   return (
     <div className="w-9/10">
+      <CreateAutorDialog handleSave={handleSave} />
       <Box>
-        <Button onClick={handleClickOpen}>Criar</Button>
         <DataGrid
           loading={loading}
-          sx={{ height: '23rem', overflow: 'unset' }}
+          sx={{ height: '23rem', overflow: 'none' }}
           rows={autores}
           columns={columns}
           rowSelection={false}
@@ -96,7 +98,7 @@ function AutorPage() {
           }}
         />
       </Box>
-      <CreateAutorDialog handleSave={handleSave} handleClickOpen={handleClickOpen} open={open} handleClose={handleClose} />
+      
     </div>
   );
 }

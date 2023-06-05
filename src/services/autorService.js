@@ -7,3 +7,8 @@ export async function getAllAutor() {
 export async function saveAutor (autor) {
   return await api.post('/admin/autor/create', autor)
 }
+
+
+export async function deleteAutor (id) {
+  return await api.delete(`/admin/autor/delete/${id}`)
+}
