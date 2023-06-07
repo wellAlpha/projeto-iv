@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { AutorPage } from "./pages";
+import { AutorPage, LoginPage } from "./pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -18,11 +18,8 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: (
-          <h1 className="text-xl text-center text-roboto text-gray-600">
-            Seja bem vindo!
-          </h1>
-        ),
+        element: 
+          <LoginPage/>
       },
       {
         path: "/admin/autor",
