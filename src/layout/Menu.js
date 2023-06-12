@@ -36,6 +36,14 @@ export default function Menu() {
             <ListItemText primary="Autor" />
           </ListItemButton>
         </Link>
+        <Link to="/admin/categoria">
+          <ListItemButton>
+            <ListItemIcon>
+              <Person />
+            </ListItemIcon>
+            <ListItemText primary="Categoria" />
+          </ListItemButton>
+        </Link>
       </List>
     </div>
   );

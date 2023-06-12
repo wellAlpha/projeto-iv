@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { AutorPage, LoginPage } from "./pages";
+import CategoriaPage from "./pages/CategoriaPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -24,6 +25,10 @@ const routes = createBrowserRouter([
       {
         path: "/admin/autor",
         element: <AutorPage />,
+      },
+      {
+        path: "/admin/categoria",
+        element: <CategoriaPage />,
       },
     ],
   },

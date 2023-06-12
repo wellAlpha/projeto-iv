@@ -16,7 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+      {}
       <Link color="inherit" href="https://mui.com/">
         Your Website
       </Link>{' '}
@@ -52,9 +52,8 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            
-          </Avatar>
+        <img src="./asserts/logo.png"/>
+
           <Typography component="h1" variant="h5">
            Livraria Recife
           </Typography>
