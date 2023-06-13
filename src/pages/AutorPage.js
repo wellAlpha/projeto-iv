@@ -72,7 +72,7 @@ function AutorPage() {
     try {
       setLoading(true);
       const response = await getAllAutor();
-      setAutores(response.data);
+      setAutores(response.data.filter(autor => autor.ativo));
     } catch (error) {
       console.error(error);
     } finally {

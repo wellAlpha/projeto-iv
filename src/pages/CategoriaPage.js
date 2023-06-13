@@ -16,7 +16,7 @@ import { red } from "@mui/material/colors";
 function CategoriaPage() {
     const columns = [
       { field: "id", headerName: "Id", width: 70, sortable: false },
-      { field: "nome", headerName: "Nome", width: 200, sortable: false },
+      { field: "descricao", headerName: "Descrição", width: 200, sortable: false },
       {
         field: "acoes",
         headerName: "Ações",
@@ -74,7 +74,7 @@ function CategoriaPage() {
       try {
         setLoading(true);
         const response = await getAllCategoria();
-        setCategorias(response.data);
+        setCategorias(response.data.filter(categoria => categoria.ativo));
       } catch (error) {
         console.error(error);
       } finally {
