@@ -1,4 +1,4 @@
-import { Home, Person } from "@mui/icons-material";
+import { Category, Home, MenuBook, Person } from "@mui/icons-material";
 import {
   List,
   ListItemButton,
@@ -6,7 +6,9 @@ import {
   ListItemText,
   ListSubheader,
 } from "@mui/material";
+
 import { Link } from "react-router-dom";
+
 export default function Menu() {
   return (
     <div className="w-60 border-r-2 h-screen">
@@ -39,9 +41,17 @@ export default function Menu() {
         <Link to="/admin/categoria">
           <ListItemButton>
             <ListItemIcon>
-              <Person />
+              <Category />
             </ListItemIcon>
             <ListItemText primary="Categoria" />
+          </ListItemButton>
+        </Link>
+        <Link to="/admin/livro">
+          <ListItemButton>
+            <ListItemIcon>
+              <MenuBook />
+            </ListItemIcon>
+            <ListItemText primary="Livro" />
           </ListItemButton>
         </Link>
       </List>

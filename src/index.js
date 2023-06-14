@@ -4,8 +4,8 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { AutorPage, LoginPage } from "./pages";
-import CategoriaPage from "./pages/CategoriaPage";
+import { AutorPage, LoginPage, CategoriaPage, LivroPage } from "./pages";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -29,6 +29,10 @@ const routes = createBrowserRouter([
       {
         path: "/admin/categoria",
         element: <CategoriaPage />,
+      },
+      {
+        path: "/admin/livro",
+        element: <LivroPage />,
       },
     ],
   },
