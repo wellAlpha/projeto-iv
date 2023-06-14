@@ -9,7 +9,7 @@ export async function saveLivro (livro) {
 }
 
 export async function updateLivro (livro) {
-  return await api.put(`/admin/livro/update/${livro.id}`, livro)
+  return await api.put(`/admin/livro/update`, livro)
 }
 
 export async function deleteLivro (id) {
