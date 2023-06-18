@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import avatar from "../assets/imgs/logo.jpeg";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/Auth";
+import { Alert, Snackbar } from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -40,9 +41,32 @@ export default function SignIn() {
   const { setUser } = useAuth();
   const navegate = useNavigate()
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const user = {
+      email: data.get("email"),
+      password: data.get("password"),
+    }
+    debugger
+    if((!user?.email || !user?.password)){
+      setOpen(true);
+      return
+    }
+    if (user?.email !== 'admin@mail.com' || user?.password !== '1234') {
+      setOpen(true);
+      return
+    }
     
     setUser({
       email: data.get("email"),
@@ -111,6 +135,11 @@ export default function SignIn() {
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          Usuário ou senha inválida.
+        </Alert>
+      </Snackbar>
       </Container>
     </ThemeProvider>
   );

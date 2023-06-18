@@ -11,10 +11,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 const routes = createBrowserRouter([
   {
     path: "/",
+    errorElement: <NotFoundPage />,
     element: <h1>Tela</h1>,
   },
   {
     path: "/login",
+    errorElement: <NotFoundPage />,
     element: <LoginPage />,
   },
   {
