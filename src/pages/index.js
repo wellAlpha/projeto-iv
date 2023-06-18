@@ -3,5 +3,6 @@ import LoginPage from "./LoginPage";
 import LivroPage from "./LivroPage";
 import CategoriaPage from "./CategoriaPage";
 import NotFoundPage from "./NotFoundPage";
+import UnauthorizedPage from "./UnauthorizedPage";
 
-export { AutorPage, LoginPage, LivroPage, CategoriaPage, NotFoundPage };
+export { AutorPage, LoginPage, LivroPage, CategoriaPage, NotFoundPage, UnauthorizedPage };

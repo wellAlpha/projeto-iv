@@ -11,6 +11,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import avatar from "../assets/imgs/logo.jpeg";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/Auth";
 
 function Copyright(props) {
   return (
@@ -35,13 +37,19 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  const { setUser } = useAuth();
+  const navegate = useNavigate()
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    
+    setUser({
       email: data.get("email"),
       password: data.get("password"),
     });
+
+    navegate('/admin/autor')
   };
 
   return (
