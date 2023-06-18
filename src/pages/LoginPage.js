@@ -58,7 +58,7 @@ export default function SignIn() {
       email: data.get("email"),
       password: data.get("password"),
     }
-    debugger
+    
     if((!user?.email || !user?.password)){
       setOpen(true);
       return
@@ -67,7 +67,7 @@ export default function SignIn() {
       setOpen(true);
       return
     }
-    
+
     setUser({
       email: data.get("email"),
       password: data.get("password"),

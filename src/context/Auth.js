@@ -2,13 +2,13 @@ import { createContext, useContext, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { UnauthorizedPage } from "../pages";
 import Menu from '../layout/Menu'
-const AuthContext = createContext(null);
+const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  debugger
+  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
+
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       {children}
@@ -25,6 +25,8 @@ export const RequireAuth = () => {
       <UnauthorizedPage />
     );
   }
+
+  sessionStorage.setItem('user', JSON.stringify({ email: ctx?.user?.email }))
 
   return (
     <div className="h-screen w-screen flex flex-row">
