@@ -17,6 +17,7 @@ import {
 import { getAllCategoria } from "../../services/categoriaService";
 import { getAllAutor } from "../../services/autorService";
 import { getAllEditora } from "../../services/editoraService";
+import ImageUploader from "../../components/ImageUploader";
 
 export default function CreateLivroDialog({
   handleSave,
@@ -40,6 +41,11 @@ export default function CreateLivroDialog({
   const [categorias, setCategorias] = useState([]);
   const [autores, setAutores] = useState([]);
   const [editoras, setEditoras] = useState([]);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+
+  const handleImageUpload = (imageUrl) => {
+    setUploadedImageUrl(imageUrl);
+  };
 
   const clearForm = () => {
     setformData({
@@ -49,26 +55,24 @@ export default function CreateLivroDialog({
       editora: "",
       autor: "",
     });
+    setUploadedImageUrl('')
   };
   const handleSubmit = async () => {
     const objSave = {
-      "titulo": formData.titulo,
-      "paginas": formData.paginas,
-      "pathFoto": null,
-      "preco": formData.preco.replace(',', '.'),
-      "categoria": {
-        "id": formData.categoria,
-        
+      titulo: formData.titulo,
+      paginas: formData.paginas,
+      pathFoto: uploadedImageUrl || null,
+      preco: formData.preco.replace(",", "."),
+      categoria: {
+        id: formData.categoria,
       },
-      "editora": {
-        "id": formData.editora,
-       
+      editora: {
+        id: formData.editora,
       },
-      "autor": {
-      "id": formData.autor,
-      
-      }
-    }
+      autor: {
+        id: formData.autor,
+      },
+    };
     console.log(objSave);
     await handleSave(objSave);
     clearForm();
@@ -227,12 +231,25 @@ export default function CreateLivroDialog({
               </FormControl>
             </Stack>
           </Box>
+          <Box>
+            <h1>Upload de Imagem</h1>
+            <ImageUploader onImageUpload={handleImageUpload} />
+            {uploadedImageUrl && (
+              <Box>
+                <h2>Imagem Carregada</h2>
+              </Box>
+            )}
+          </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => {
-          clearForm();
-          handleClose();
-        }}>Cancelar</Button>
+          <Button
+            onClick={() => {
+              clearForm();
+              handleClose();
+            }}
+          >
+            Cancelar
+          </Button>
           <Button onClick={handleSubmit}>Salvar</Button>
         </DialogActions>
       </Dialog>

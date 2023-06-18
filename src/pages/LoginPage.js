@@ -39,12 +39,12 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
   const { setUser } = useAuth();
-  const navegate = useNavigate()
+  const navegate = useNavigate();
 
   const [open, setOpen] = React.useState(false);
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -57,15 +57,15 @@ export default function SignIn() {
     const user = {
       email: data.get("email"),
       password: data.get("password"),
-    }
-    
-    if((!user?.email || !user?.password)){
+    };
+
+    if (!user?.email || !user?.password) {
       setOpen(true);
-      return
+      return;
     }
-    if (user?.email !== 'admin@mail.com' || user?.password !== '1234') {
+    if (user?.email !== "admin@mail.com" || user?.password !== "1234") {
       setOpen(true);
-      return
+      return;
     }
 
     setUser({
@@ -73,7 +73,7 @@ export default function SignIn() {
       password: data.get("password"),
     });
 
-    navegate('/admin/autor')
+    navegate("/admin/autor");
   };
 
   return (
@@ -135,11 +135,11 @@ export default function SignIn() {
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-          Usuário ou senha inválida.
-        </Alert>
-      </Snackbar>
+        <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+            Usuário ou senha inválida.
+          </Alert>
+        </Snackbar>
       </Container>
     </ThemeProvider>
   );

@@ -17,7 +17,6 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const RequireAuth = () => {
-  debugger
   const ctx = useAuth();
 
   if (!ctx?.user?.email) {

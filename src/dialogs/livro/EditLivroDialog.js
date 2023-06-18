@@ -17,6 +17,7 @@ import {
   Select,
   Stack,
 } from "@mui/material";
+import ImageUploader from "../../components/ImageUploader";
 
 export default function EditLivroDialog({
   livro,
@@ -34,6 +35,11 @@ export default function EditLivroDialog({
   const [categorias, setCategorias] = useState([]);
   const [autores, setAutores] = useState([]);
   const [editoras, setEditoras] = useState([]);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+
+  const handleImageUpload = (imageUrl) => {
+    setUploadedImageUrl(imageUrl);
+  };
 
   const getCategorias = async () => {
     const response = await getAllCategoria();
@@ -63,12 +69,11 @@ export default function EditLivroDialog({
   }, [livro]);
 
   const handleSubmit = async () => {
-    console.log(formData)
     const objUpdate = {
       "id": formData.id,
       "titulo": formData.titulo,
       "paginas": formData.paginas,
-      "pathFoto": null,
+      "pathFoto": uploadedImageUrl || null,
       "preco": formData.preco,
       "categoria": {
         "id": formData.categoria,
@@ -215,6 +220,15 @@ export default function EditLivroDialog({
                 </Select>
               </FormControl>
             </Stack>
+          </Box>
+          <Box>
+            <h1>Upload de Imagem</h1>
+            <ImageUploader onImageUpload={handleImageUpload} />
+            {uploadedImageUrl && (
+              <Box>
+                <h2>Imagem Carregada</h2>
+              </Box>
+            )}
           </Box>
         </DialogContent>
         <DialogActions>
