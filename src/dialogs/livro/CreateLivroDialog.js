@@ -73,25 +73,36 @@ export default function CreateLivroDialog({
         id: formData.autor,
       },
     };
-    console.log(objSave);
     await handleSave(objSave);
     clearForm();
     handleClose();
   };
 
   const getCategorias = async () => {
+   try {
     const response = await getAllCategoria();
     setCategorias(response.data.filter((cat) => cat.ativo));
+   } catch (error) {
+    console.error(error)
+   }
   };
 
   const getAutores = async () => {
-    const response = await getAllAutor();
-    setAutores(response.data.filter((autor) => autor.ativo));
+    try {
+      const response = await getAllAutor();
+      setAutores(response.data.filter((autor) => autor.ativo));
+    } catch (error) {
+      console.error(error)
+    }
   };
 
   const getEditoras = async () => {
-    const response = await getAllEditora();
-    setEditoras(response.data.filter((editora) => editora.ativo));
+    try {
+      const response = await getAllEditora();
+      setEditoras(response.data.filter((editora) => editora.ativo));
+    } catch (error) {
+      console.error(error)
+    }
   };
 
   return (

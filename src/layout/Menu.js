@@ -1,4 +1,4 @@
-import { Category, Home, MenuBook, Person } from "@mui/icons-material";
+import { Category, MenuBook, Person } from "@mui/icons-material";
 import {
   List,
   ListItemButton,
@@ -22,14 +22,6 @@ export default function Menu() {
           </ListSubheader>
         }
       >
-        <Link to="/">
-          <ListItemButton>
-            <ListItemIcon>
-              <Home />
-            </ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItemButton>
-        </Link>
         <Link to="/admin/autor">
           <ListItemButton>
             <ListItemIcon>
