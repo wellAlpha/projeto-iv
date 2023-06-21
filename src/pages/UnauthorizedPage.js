@@ -9,7 +9,7 @@ export default function UnauthorizedPage() {
         Não autorizado!
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
-      Para acessar está pagina é necessário fazer <Link style={{color: 'blue'}} to="/login">login.</Link>
+      Para acessar está pagina é necessário fazer <Link style={{color: 'blue'}} to="/">login.</Link>
       </Typography>
       </Stack>
     </div>
